@@ -2,8 +2,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  /* потом поменять на display:flex; */
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   top: 0;

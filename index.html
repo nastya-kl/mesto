@@ -29,48 +29,48 @@
         <div class="profile__add-button"></div>
       </section>
 
-      <section class="elements" aria-label="Фотографии мест России">
+      <section class="elements">
         <ul class="elements__container">
           <li class="element">
             <img class="element__image" src="./images/Baikal.png" alt="Фото квадрациклов на льду Байкала">
             <div class="element__lower-part">
               <h2 class="element__heading">Байкал</h2>
-              <div class="element__like-button element__like-button_status_active"></div>
+              <div class="element__like-button"></div>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Olkhon-island.png" alt="Остров Ольхон">
             <div class="element__lower-part">
               <h2 class="element__heading">Ольхон</h2>
-              <div class="element__like-button element__like-button_status_active">
-              </div>
+              <div class="element__like-button"></div>
+            </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Sayan-mountains.png" alt="Горы Саяны с высоты птичьего полёта">
             <div class="element__lower-part">
               <h2 class="element__heading">Саяны</h2>
-              <div class="element__like-button element__like-button_status_active"></div>
+              <div class="element__like-button"></div>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Kamchatka.png" alt="Побережье Камчатки">
             <div class="element__lower-part">
               <h2 class="element__heading">Камчатка</h2>
-              <div class="element__like-button element__like-button_status_active"></div>
+              <div class="element__like-button"></div>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Elbrus.png" alt="Велосипедист на фоне горы Эльбрус">
             <div class="element__lower-part">
               <h2 class="element__heading">Эльбрус</h2>
-              <div class="element__like-button element__like-button_status_active"></div>
+              <div class="element__like-button"></div>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Murmansk.png" alt="Цветы на фоне заката в Мурманске">
             <div class="element__lower-part">
               <h2 class="element__heading">Мурманск</h2>
-              <div class="element__like-button element__like-button_status_active"></div>
+              <div class="element__like-button"></div>
             </div>
           </li>
         </ul>
@@ -85,19 +85,21 @@
       <div class="popup__container">
         <div class="close-icon"></div>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form" action="">
+        <form class="popup__form" action="#">
           <label class="popup__label">
-            <input class="popup__profile-info" type="text" name="profile-name" value="Жак-Ив Кусто" required>
+            <input class="popup__profile-info profile-name" type="text" name="profile-name" value="Жак-Ив Кусто" required>
           </label>
           <label class="popup__label">
-            <input class="popup__profile-info" type="text" name="profile-description" value="Исследователь океана" required>
+            <input class="popup__profile-info profile-job" type="text" name="profile-job" value="Исследователь океана" required>
           </label>
-          <button class="popup__save-button" type="button">Сохранить</button>
+          <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
 
   </div>
+
+  <script src="./index.js"></script>
 </body>
 
 </html>

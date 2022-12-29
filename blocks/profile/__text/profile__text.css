@@ -7,7 +7,7 @@
   row-gap: 10px;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 700px) {
   .profile__text {
     margin: 26px 0 0 24px;
   }
