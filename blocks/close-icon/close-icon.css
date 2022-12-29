@@ -1,0 +1,32 @@
+.close-icon {
+  background-image: url(../../images/close-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 32px;
+  min-height: 32px;
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  transition: opacity .5s;
+}
+
+.close-icon:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .close-icon {
+    top: -48px;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .close-icon {
+    width: 20px;
+    min-height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}
