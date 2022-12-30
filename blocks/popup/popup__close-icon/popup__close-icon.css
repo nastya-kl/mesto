@@ -1,5 +1,5 @@
-.close-icon {
-  background-image: url(../../images/close-icon.svg);
+.popup__close-icon {
+  background-image: url(../../../images/close-icon.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(0, 0, 0, 0);
@@ -12,20 +12,20 @@
   transition: opacity .5s;
 }
 
-.close-icon:hover {
+.popup__close-icon:hover {
   opacity: .6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
-  .close-icon {
+  .popup__close-icon {
     top: -48px;
     right: 0;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .close-icon {
+  .popup__close-icon {
     width: 20px;
     min-height: 20px;
     top: -36px;
