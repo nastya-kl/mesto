@@ -1,4 +1,4 @@
-.copyright {
+.footer__copyright {
   max-width: 880px;
   margin: 67px auto 60px;
   font-weight: 400;
@@ -8,13 +8,13 @@
   }
 
 @media screen and (max-width: 900px) {
-  .copyright {
+  .footer__copyright {
     margin: 67px 27px 60px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .copyright {
+  .footer__copyright {
     margin: 48px 19px 36px;
     font-size: 14px;
     line-height: 17px;

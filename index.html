@@ -11,9 +11,7 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <div class="header__container">
-        <img class="header__logo" src="./images/header-logo.svg" alt="">
-      </div>
+      <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Места России">
     </header>
 
     <main class="main">
@@ -22,11 +20,11 @@
           <img class="profile__avatar" src="./images/profile-photo.png" alt="Фото Жак-Ив-Кусто">
           <div class="profile__text">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <div class="profile__edit-button"></div>
+            <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
             <p class="profile__description">Исследователь океана</p>
           </div>
         </div>
-        <div class="profile__add-button"></div>
+        <button class="profile__add-button" type="button" aria-label="Кнопка добавления фото"></button>
       </section>
 
       <section class="elements">
@@ -35,42 +33,48 @@
             <img class="element__image" src="./images/Baikal.png" alt="Фото квадрациклов на льду Байкала">
             <div class="element__lower-part">
               <h2 class="element__heading">Байкал</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Olkhon-island.png" alt="Остров Ольхон">
             <div class="element__lower-part">
               <h2 class="element__heading">Ольхон</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Sayan-mountains.png" alt="Горы Саяны с высоты птичьего полёта">
             <div class="element__lower-part">
               <h2 class="element__heading">Саяны</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Kamchatka.png" alt="Побережье Камчатки">
             <div class="element__lower-part">
               <h2 class="element__heading">Камчатка</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Elbrus.png" alt="Велосипедист на фоне горы Эльбрус">
             <div class="element__lower-part">
               <h2 class="element__heading">Эльбрус</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/Murmansk.png" alt="Цветы на фоне заката в Мурманске">
             <div class="element__lower-part">
               <h2 class="element__heading">Мурманск</h2>
-              <div class="element__like-button"></div>
+              <button class="element__like-button element__like-button_status_active" type="button"
+                aria-label="Кнопка поставить лайк"></button>
             </div>
           </li>
         </ul>
@@ -78,19 +82,19 @@
     </main>
 
     <footer class="footer">
-      <p class="copyright">&#169; 2020 Mesto Russia</p>
+      <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
     <div class="popup">
       <div class="popup__container">
-        <div class="close-icon"></div>
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__form" action="#">
+        <button class="close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
+        <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
+        <form class="popup__form" action="#" name="profile-form">
           <label class="popup__label">
-            <input class="popup__profile-info profile-name" type="text" name="profile-name" value="Жак-Ив Кусто" required>
+            <input class="popup__input popup__input_type_name" type="text" name="profile-name" required placeholder="Введите имя">
           </label>
           <label class="popup__label">
-            <input class="popup__profile-info profile-job" type="text" name="profile-job" value="Исследователь океана" required>
+            <input class="popup__input popup__input_type_job" type="text" name="profile-job" required placeholder="Введите описание">
           </label>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>

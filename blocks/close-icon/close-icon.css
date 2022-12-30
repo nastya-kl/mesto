@@ -2,6 +2,8 @@
   background-image: url(../../images/close-icon.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
   width: 32px;
   min-height: 32px;
   position: absolute;
@@ -27,6 +29,5 @@
     width: 20px;
     min-height: 20px;
     top: -36px;
-    right: 0;
   }
 }

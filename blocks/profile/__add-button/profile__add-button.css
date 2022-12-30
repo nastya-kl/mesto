@@ -2,6 +2,7 @@
   background-image: url(../../../images/symbol-plus.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-color: black;
   width: 150px;
   min-height: 50px;
   border: 2px solid #FFFFFF;
@@ -9,6 +10,7 @@
   transition: opacity .5s;
   align-self: center;
   box-sizing: border-box;
+
 }
 
 .profile__add-button:hover {

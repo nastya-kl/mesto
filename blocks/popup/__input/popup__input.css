@@ -1,4 +1,4 @@
-.popup__profile-info {
+.popup__input {
   width: 100%;
   border: none;
   outline: none;
@@ -8,4 +8,7 @@
   margin: 0 0 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding: 0;
 }
+
+

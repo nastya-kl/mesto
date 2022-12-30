@@ -1,31 +1,25 @@
-// Появление popup //
-
 let popup = document.querySelector('.popup');
 let editButton = document.querySelector('.profile__edit-button');
+let closeButton = document.querySelector('.close-icon')
+let formElement = document.querySelector('.popup__form');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_job');
+let profileName = document.querySelector('.profile__name');
+let profileDescription = document.querySelector('.profile__description');
 
 function showClickEditButton() {
-  popup.style.display = 'flex';
-};
+  popup.classList.toggle('popup_type_opened');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileDescription.textContent;
+}
 
 editButton.addEventListener('click', showClickEditButton);
 
-// Закрытие popup //
-
-let closeButton = document.querySelector('.close-icon')
-
 function showClickCloseButton() {
-  popup.style.display = 'none';
+  popup.classList.remove('popup_type_opened');
 };
 
 closeButton.addEventListener('click', showClickCloseButton);
-
-// Изменение текста в профиле //
-
-let formElement = document.querySelector('.popup__form');
-let nameInput = document.querySelector('.profile-name');
-let jobInput = document.querySelector('.profile-job');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
 
 function handleFormSubmit (evt) {
     evt.preventDefault();
