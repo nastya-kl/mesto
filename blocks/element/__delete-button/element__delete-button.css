@@ -7,6 +7,7 @@
   background-image: url(../../../images/trash.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-color: unset;
   border: none;
   width: 18px;
   height: 19px;

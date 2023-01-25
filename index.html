@@ -29,64 +29,17 @@
 
       <section class="elements">
         <ul class="elements__container">
-          <li class="element">
-            <button class="element__delete-button element__delete-button_status_active" type="button" aria-label="Кнопка поставить лайк"></button>
-            <img class="element__image" src="./images/Baikal.png" alt="Фото квадрациклов на льду Байкала">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Байкал</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/Olkhon-island.png" alt="Остров Ольхон">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Ольхон</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/Sayan-mountains.png" alt="Горы Саяны с высоты птичьего полёта">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Саяны</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/Kamchatka.png" alt="Побережье Камчатки">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Камчатка</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/Elbrus.png" alt="Велосипедист на фоне горы Эльбрус">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Эльбрус</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/Murmansk.png" alt="Цветы на фоне заката в Мурманске">
-            <div class="element__lower-part">
-              <h2 class="element__heading">Мурманск</h2>
-              <button class="element__like-button element__like-button_status_active" type="button"
-                aria-label="Кнопка поставить лайк"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
+
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_info">
       <div class="popup__container">
         <button class="popup__close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
         <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
@@ -97,12 +50,39 @@
           <label class="popup__label">
             <input class="popup__input popup__input_type_job" type="text" name="profile-job" required placeholder="Введите описание">
           </label>
-          <button class="popup__save-button" type="submit">Сохранить</button>
+          <button class="popup__form-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_add">
+      <div class="popup__container">
+        <button class="popup__close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
+        <h2 class="popup__heading">Новое&nbsp;место</h2>
+        <form class="popup__form" action="#" name="profile-form">
+          <label class="popup__label">
+            <input class="popup__input popup__input_type_image-name" type="text" name="profile-name" required placeholder="Название">
+          </label>
+          <label class="popup__label">
+            <input class="popup__input popup__input_type_image-link" type="text" name="profile-job" required placeholder="Ссылка на картинку">
+          </label>
+          <button class="popup__form-button" type="submit">Создать</button>
         </form>
       </div>
     </div>
 
   </div>
+
+  <template id="elements-template">
+    <li class="element">
+      <button class="element__delete-button element__delete-button_status_active" type="button" aria-label="Кнопка поставить лайк"></button>
+      <img class="element__image" src="" alt="">
+      <div class="element__lower-part">
+        <h2 class="element__heading"></h2>
+        <button class="element__like-button element__like-button_status_active" type="button" aria-label="Кнопка поставить лайк"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./index.js"></script>
 </body>
