@@ -60,6 +60,7 @@ const imageCaption = document.querySelector('.popup__image-caption');
 // Функция открытия попапа
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+
 }
 
 // Функция закрытия попапа
@@ -80,7 +81,7 @@ closeEditButton.addEventListener('click', function() {
 });
 
 // Отправка формы по нажатию кнопки Сохранить
-function handleFormSubmitPopupInfo (evt) {
+function handleFormPopupInfoSubmit (evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
@@ -89,7 +90,7 @@ function handleFormSubmitPopupInfo (evt) {
     closePopup(popupInfo);
 }
 
-formInfo.addEventListener('submit', handleFormSubmitPopupInfo);
+formInfo.addEventListener('submit', handleFormPopupInfoSubmit);
 
 // Отображение карточек
 const cardsContainer = document.querySelector('.elements__container');
@@ -97,10 +98,11 @@ const cardsTemplate = document.querySelector('#elements-template').content;
 
 const createCard = (element) => {
   const cardElement = cardsTemplate.cloneNode(true);
+  const elementImage = cardElement.querySelector('.element__image');
 
   cardElement.querySelector('.element__heading').textContent = element.name;
-  cardElement.querySelector('.element__image').src = element.link;
-  cardElement.querySelector('.element__image').alt = element.alt;
+  elementImage.src = element.link;
+  elementImage.alt = element.alt;
 
   const likeButton = cardElement.querySelector('.element__like-button');
   likeButton.addEventListener('click', (evt) => {
@@ -117,36 +119,37 @@ const createCard = (element) => {
   cardElement.querySelector('.element__image').addEventListener('click', function (evt) {
     openPopup(popupImage);
     cardImageLarge.src = evt.target.src;
-    imageCaption.textContent = evt.target.alt;
-  });
-
-  closeImageButton.addEventListener('click', function() {
-    closePopup(popupImage);
+    cardImageLarge.alt = evt.target.alt;
+    imageCaption.textContent = evt.target.closest('.element').textContent;
   });
 
   return cardElement;
 };
 
+// Закрытие окна с увеличенным изображением
+closeImageButton.addEventListener('click', function() {
+  closePopup(popupImage);
+});
+
 // Добавление карточки
-const renderCard = (element) => {
+const renderInitialCard = (element) => {
   cardsContainer.append(createCard(element));
 };
 
 // Добавление 6 изначальных карточек
 initialCards.forEach((item) => {
-  renderCard(item);
+  renderInitialCard(item);
 });
 
 // Открытие окна добавления карточки
 addButton.addEventListener('click', function () {
+  formAdd.reset();
   openPopup(popupAdd);
 });
 
 // Закрытие окна добавления карточки
 closeAddButton.addEventListener('click', function() {
   closePopup(popupAdd);
-  imageNameInput.value = '';
-  imageLinkInput.value = '';
 });
 
 // Отправка формы по нажатию кнопки Создать (добавление карточки)
@@ -157,8 +160,6 @@ function handleFormSubmitPopupAdd (evt) {
   cardsContainer.prepend(createCard(newCard));
 
   closePopup(popupAdd);
-  imageNameInput.value = '';
-  imageLinkInput.value = '';
 };
 
 formAdd.addEventListener('submit', handleFormSubmitPopupAdd);

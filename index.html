@@ -61,13 +61,13 @@
       <div class="popup__container">
         <button class="popup__close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
         <h2 class="popup__heading">Новое&nbsp;место</h2>
-        <form class="popup__form" action="#" name="profile-form">
+        <form class="popup__form" name="profile-form">
           <label class="popup__label">
             <input class="popup__input popup__input_type_image-name" type="text" name="profile-name" required
               placeholder="Название">
           </label>
           <label class="popup__label">
-            <input class="popup__input popup__input_type_image-link" type="text" name="profile-job" required
+            <input class="popup__input popup__input_type_image-link" type="url" name="profile-job" required
               placeholder="Ссылка на картинку">
           </label>
           <button class="popup__form-button" type="submit">Создать</button>
@@ -98,7 +98,7 @@
     </li>
   </template>
 
-  <script src="./index.js"></script>
+  <script defer src="./index.js"></script>
 </body>
 
 </html>
