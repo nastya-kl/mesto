@@ -32,30 +32,30 @@ const initialCards = [
 ];
 
 // Добавление инф-ции профиля
-let popupInfo = document.querySelector('.popup_info');
-let editButton = document.querySelector('.profile__edit-button');
-let closeEditButton = popupInfo.querySelector('.popup__close-icon');
-let formInfo = popupInfo.querySelector('.popup__form');
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
+const popupInfo = document.querySelector('.popup__info');
+const editButton = document.querySelector('.profile__edit-button');
+const closeEditButton = popupInfo.querySelector('.popup__close-icon');
+const formInfo = popupInfo.querySelector('.popup__form');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
 
 // Добавление карточек сфото
-let popupAdd = document.querySelector('.popup_add');
-let addButton = document.querySelector('.profile__add-button')
-let closeAddButton = popupAdd.querySelector('.popup__close-icon')
-let formAdd = popupAdd.querySelector('.popup__form');
-let imageNameInput = document.querySelector('.popup__input_type_image-name');
-let imageLinkInput = document.querySelector('.popup__input_type_image-link');
-let cardHeading = document.querySelector('.element__heading');
-let cardImage = document.querySelector('.element__image');
+const popupAdd = document.querySelector('.popup__add');
+const addButton = document.querySelector('.profile__add-button')
+const closeAddButton = popupAdd.querySelector('.popup__close-icon')
+const formAdd = popupAdd.querySelector('.popup__form');
+const imageNameInput = document.querySelector('.popup__input_type_image-name');
+const imageLinkInput = document.querySelector('.popup__input_type_image-link');
+const cardHeading = document.querySelector('.element__heading');
+const cardImage = document.querySelector('.element__image');
 
 // Открытие попап с фото
-let popupImage = document.querySelector('.popup_image');
-let closeImageButton = popupImage.querySelector('.popup__close-icon');
-let cardImageLarge = document.querySelector('.popup__card-image');
-let imageCaption = document.querySelector('.popup__image-caption');
+const popupImage = document.querySelector('.popup__image');
+const closeImageButton = popupImage.querySelector('.popup__close-icon');
+const cardImageLarge = document.querySelector('.popup__card-image');
+const imageCaption = document.querySelector('.popup__image-caption');
 
 // Функция открытия попапа
 function openPopup(popupElement) {
@@ -92,8 +92,8 @@ function handleFormSubmitPopupInfo (evt) {
 formInfo.addEventListener('submit', handleFormSubmitPopupInfo);
 
 // Отображение карточек
-let cardsContainer = document.querySelector('.elements__container');
-let cardsTemplate = document.querySelector('#elements-template').content;
+const cardsContainer = document.querySelector('.elements__container');
+const cardsTemplate = document.querySelector('#elements-template').content;
 
 const createCard = (element) => {
   const cardElement = cardsTemplate.cloneNode(true);
