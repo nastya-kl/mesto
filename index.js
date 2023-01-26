@@ -32,7 +32,7 @@ const initialCards = [
 ];
 
 // Добавление инф-ции профиля
-let popupInfo = document.querySelector('.popup__info');
+let popupInfo = document.querySelector('.popup_info');
 let editButton = document.querySelector('.profile__edit-button');
 let closeEditButton = popupInfo.querySelector('.popup__close-icon');
 let formInfo = popupInfo.querySelector('.popup__form');
@@ -42,7 +42,7 @@ let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 
 // Добавление карточек сфото
-let popupAdd = document.querySelector('.popup__add');
+let popupAdd = document.querySelector('.popup_add');
 let addButton = document.querySelector('.profile__add-button')
 let closeAddButton = popupAdd.querySelector('.popup__close-icon')
 let formAdd = popupAdd.querySelector('.popup__form');
@@ -52,7 +52,7 @@ let cardHeading = document.querySelector('.element__heading');
 let cardImage = document.querySelector('.element__image');
 
 // Открытие попап с фото
-let popupImage = document.querySelector('.popup__image');
+let popupImage = document.querySelector('.popup_image');
 let closeImageButton = popupImage.querySelector('.popup__close-icon');
 let cardImageLarge = document.querySelector('.popup__card-image');
 let imageCaption = document.querySelector('.popup__image-caption');
