@@ -60,12 +60,52 @@ const imageCaption = document.querySelector('.popup__image-caption');
 // Функция открытия попапа
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
-
-}
+  document.addEventListener('keydown', closePopupByEsc)
+};
 
 // Функция закрытия попапа
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc)
+};
+
+// Закрытие попапа по нажатию на оверлей и кнопку крестика
+const allPopups = document.querySelectorAll('.popup')
+
+allPopups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    } else if (evt.target.classList.contains('popup__close-icon')) {
+      closePopup(popup);
+    };
+  });
+});
+
+// Закрытие попапа по нажатию на Esc
+function closePopupByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
+  };
+};
+
+function resetFormValidation(popup) {
+  if (popupInfo.classList.contains('popup_opened') || popupAdd.classList.contains('popup_opened')) {
+    const formButton = popup.querySelector('.popup__form-button');
+    const formInputs = Array.from(popup.querySelectorAll('.popup__input'));
+    const formErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
+
+    formButton.setAttribute('disabled', true);
+
+    formInputs.forEach((input) => {
+      input.classList.remove('popup__input_type_error');
+    });
+
+    formErrors.forEach((error) => {
+      error.textContent = '';
+    });
+  };
 };
 
 // Открытие окна редактирования информации профиля
@@ -73,11 +113,7 @@ editButton.addEventListener('click', function () {
   openPopup(popupInfo);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-});
-
-// Закрытие окна редактирования информации профиля
-closeEditButton.addEventListener('click', function() {
-  closePopup(popupInfo);
+  resetFormValidation(popupInfo);
 });
 
 // Отправка формы по нажатию кнопки Сохранить
@@ -126,11 +162,6 @@ const createCard = (element) => {
   return cardElement;
 };
 
-// Закрытие окна с увеличенным изображением
-closeImageButton.addEventListener('click', function() {
-  closePopup(popupImage);
-});
-
 // Добавление карточки
 const renderInitialCard = (element) => {
   cardsContainer.append(createCard(element));
@@ -145,11 +176,7 @@ initialCards.forEach((item) => {
 addButton.addEventListener('click', function () {
   formAdd.reset();
   openPopup(popupAdd);
-});
-
-// Закрытие окна добавления карточки
-closeAddButton.addEventListener('click', function() {
-  closePopup(popupAdd);
+  resetFormValidation(popupAdd);
 });
 
 // Отправка формы по нажатию кнопки Создать (добавление карточки)

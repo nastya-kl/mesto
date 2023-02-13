@@ -3,13 +3,11 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 29px;
   justify-content: stretch;
 }
 
 @media screen and (max-width: 320px) {
   .popup__form {
-    gap: 0px;
     max-width: 238px;
   }
 }

@@ -43,14 +43,32 @@
       <div class="popup__container">
         <button class="popup__close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
         <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
-        <form class="popup__form" action="#" name="profile-form">
+        <form class="popup__form" action="#" name="profile-form" novalidate>
           <label class="popup__label">
-            <input class="popup__input popup__input_type_name" type="text" name="profile-name" required
-              placeholder="Введите имя">
+            <input
+            class="popup__input popup__input_type_name"
+            id="profile-name-input"
+            type="text"
+            name="profile-name"
+            placeholder="Введите имя"
+            minlength="2"
+            maxlength="40"
+            required
+            >
+            <span class="profile-name-input-error popup__input-error"></span>
           </label>
           <label class="popup__label">
-            <input class="popup__input popup__input_type_job" type="text" name="profile-job" required
-              placeholder="Введите описание">
+            <input
+            class="popup__input popup__input_type_job"
+            id="profile-job-input"
+            type="text"
+            name="profile-job"
+            placeholder="Введите описание"
+            minlength="2"
+            maxlength="200"
+            required
+            >
+            <span class="profile-job-input-error popup__input-error"></span>
           </label>
           <button class="popup__form-button" type="submit">Сохранить</button>
         </form>
@@ -61,14 +79,30 @@
       <div class="popup__container">
         <button class="popup__close-icon" type="button" aria-label="Кнопка закрыть окно"></button>
         <h2 class="popup__heading">Новое&nbsp;место</h2>
-        <form class="popup__form" name="profile-form">
+        <form class="popup__form" name="profile-form" novalidate>
           <label class="popup__label">
-            <input class="popup__input popup__input_type_image-name" type="text" name="profile-name" required
-              placeholder="Название">
+            <input
+            class="popup__input popup__input_type_image-name"
+            id="image-name-imput"
+            type="text"
+            name="image-name"
+            placeholder="Название"
+            minlength="2"
+            maxlength="30"
+            required
+            >
+            <span class="image-name-imput-error popup__input-error"></span>
           </label>
           <label class="popup__label">
-            <input class="popup__input popup__input_type_image-link" type="url" name="profile-job" required
-              placeholder="Ссылка на картинку">
+            <input
+            class="popup__input popup__input_type_image-link"
+            id="image-url-imput"
+            type="url"
+            name="image-url"
+            placeholder="Ссылка на картинку"
+            required
+            >
+            <span class="image-url-imput-error popup__input-error"></span>
           </label>
           <button class="popup__form-button" type="submit">Создать</button>
         </form>
@@ -99,6 +133,7 @@
   </template>
 
   <script defer src="./index.js"></script>
+  <script defer src="./validate.js"></script>
 </body>
 
 </html>
