@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import { FormValidator, formValidationConfig } from './FormValidator.js';
 
 const initialCards = [
   {
@@ -41,6 +42,7 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+const formInfoButton = popupInfo.querySelector('.popup__form-button');
 
 // Добавление карточек сфото
 const popupAdd = document.querySelector('.popup_add');
@@ -48,6 +50,9 @@ const addButton = document.querySelector('.profile__add-button')
 const formAdd = popupAdd.querySelector('.popup__form');
 const imageNameInput = document.querySelector('.popup__input_type_image-name');
 const imageLinkInput = document.querySelector('.popup__input_type_image-link');
+const formAddButton = popupAdd.querySelector('.popup__form-button');
+
+
 
 // Функция открытия попапа
 function openPopup(popupElement) {
@@ -82,13 +87,11 @@ function closePopupByEsc(evt) {
   };
 };
 
+// Сброс форм
 function resetFormValidation(popup) {
   if (popupInfo.classList.contains('popup_opened') || popupAdd.classList.contains('popup_opened')) {
-    const formButton = popup.querySelector('.popup__form-button');
     const formInputs = Array.from(popup.querySelectorAll('.popup__input'));
     const formErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
-
-    formButton.setAttribute('disabled', true);
 
     formInputs.forEach((input) => {
       input.classList.remove('popup__input_type_error');
@@ -106,6 +109,7 @@ editButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
   resetFormValidation(popupInfo);
+  formInfoButton.removeAttribute('disabled');
 });
 
 // Отправка формы по нажатию кнопки Сохранить
@@ -116,7 +120,7 @@ function handleFormPopupInfoSubmit (evt) {
     profileDescription.textContent = jobInput.value;
 
     closePopup(popupInfo);
-}
+};
 
 formInfo.addEventListener('submit', handleFormPopupInfoSubmit);
 
@@ -127,7 +131,7 @@ function createCard(data, templateSelector, openPopup) {
   const card = new Card(data, templateSelector, openPopup);
   const cardElement = card.generateCard();
   return cardElement;
-}
+};
 
 // Добавление 6 изначальных карточек
 initialCards.forEach((item) => {
@@ -135,10 +139,11 @@ initialCards.forEach((item) => {
 });
 
 // Открытие окна добавления карточки
-addButton.addEventListener('click', function () {
+addButton.addEventListener('click', () => {
   formAdd.reset();
   openPopup(popupAdd);
   resetFormValidation(popupAdd);
+  formAddButton.setAttribute('disabled', true);
 });
 
 // Отправка формы по нажатию кнопки Создать (добавление карточки)
@@ -152,3 +157,9 @@ function handleFormSubmitPopupAdd (evt) {
 };
 
 formAdd.addEventListener('submit', handleFormSubmitPopupAdd);
+
+const profileInfoValidation = new FormValidator(formValidationConfig, popupInfo);
+profileInfoValidation.enableValidation();
+
+const photoAddingValidation = new FormValidator(formValidationConfig, popupAdd);
+photoAddingValidation.enableValidation();
