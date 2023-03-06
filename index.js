@@ -87,22 +87,6 @@ function closePopupByEsc(evt) {
   };
 };
 
-//! Сброс форм
-// function resetFormValidation(popup) {
-//   if (popupInfo.classList.contains('popup_opened') || popupAdd.classList.contains('popup_opened')) {
-//     const formInputs = Array.from(popup.querySelectorAll('.popup__input'));
-//     const formErrors = Array.from(popup.querySelectorAll('.popup__input-error'));
-
-//     formInputs.forEach((input) => {
-//       input.classList.remove('popup__input_type_error');
-//     });
-
-//     formErrors.forEach((error) => {
-//       error.textContent = '';
-//     });
-//   };
-// };
-
 // Открытие окна редактирования информации профиля
 editButton.addEventListener('click', function () {
   openPopup(popupInfo);
