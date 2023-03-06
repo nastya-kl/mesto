@@ -5,6 +5,9 @@ export default class Card {
     this._name = data.name;
     this._templateSelector = templateSelector;
     this._openPopup = openPopup;
+    this._popupImage = document.querySelector('.popup_image');
+    this._bigImage = document.querySelector('.popup__card-image');
+    this._imageCaption = document.querySelector('.popup__image-caption');
   }
 
   _getTemplate() {
@@ -24,7 +27,7 @@ export default class Card {
     this._deleteButton = this._element.querySelector('.element__delete-button');
 
     this._image.src = this._link;
-    this._image.alt = this._alt;
+    this._image.alt = this._name;
     this._heading.textContent = this._name;
 
     this._setEventListeners();
@@ -36,18 +39,15 @@ export default class Card {
   }
 
   _deleteCard() {
-    this._deleteButton.closest('.element').remove();
+    this._element.remove();
+    this._element = null
   }
 
   _openImagePopup() {
-    this._popupImage = document.querySelector('.popup_image');
-    this._bigImage = document.querySelector('.popup__card-image');
-    this._imageCaption = document.querySelector('.popup__image-caption');
-
     this._openPopup(this._popupImage);
 
     this._bigImage.src = this._link;
-    this._bigImage.alt = this._alt;
+    this._bigImage.alt = this._name;
     this._imageCaption.textContent = this._name;
   }
 
