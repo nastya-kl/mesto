@@ -22,44 +22,9 @@ import {
   cardsContainer,
   popupImage } from './utils/constants.js'
 
-// // Функция открытия попапа
-// function openePopup(popupElement) {
-//   popupElement.classList.add('popup_opened');
-//   document.addEventListener('keydown', closePopupByEsc)
-// };
-
-// // Функция закрытия попапа
-// function closePopup(popupElement) {
-//   popupElement.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closePopupByEsc)
-// };
-
-// // Закрытие попапа по нажатию на оверлей и кнопку крестика
-// allPopups.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//     if (evt.target.classList.contains('popup_opened')) {
-//       closePopup(popup);
-//     } else if (evt.target.classList.contains('popup__close-icon')) {
-//       closePopup(popup);
-//     };
-//   });
-// });
-
-// // Закрытие попапа по нажатию на Esc
-// function closePopupByEsc(evt) {
-//   if (evt.key === 'Escape') {
-//     const openedPopup = document.querySelector('.popup_opened')
-//     closePopup(openedPopup);
-//   };
-// };
-
 const infoPopup = new Popup(popupInfo);
 const addPopup = new Popup(popupAdd);
 const imagePopup = new PopupWithImage(popupImage);
-
-// const handleCardClick = (link, name) => {
-//   imagePopup.openPopup(link, name);
-// }
 
 // Открытие окна редактирования информации профиля
 editButton.addEventListener('click', function () {
@@ -70,7 +35,7 @@ editButton.addEventListener('click', function () {
 });
 
 // Отправка формы по нажатию кнопки Сохранить
-function handleFormPopupInfoSubmit (evt) {
+function handleFormSubmitPopupInfo (evt) {
     evt.preventDefault();
 
     profileName.textContent = nameInput.value;
@@ -79,14 +44,14 @@ function handleFormPopupInfoSubmit (evt) {
     infoPopup.closePopup();
 };
 
-formInfo.addEventListener('submit', handleFormPopupInfoSubmit);
+formInfo.addEventListener('submit', handleFormSubmitPopupInfo);
 
 // Отображение карточек
 const createCard = (item) => {
   const card = new Card({
     data: item,
-    handleCardClick: (item) => {
-      imagePopup.openPopup(item);
+    handleCardClick: (link, name) => {
+      imagePopup.openPopup(link, name);
     }
   },
   '#elements-template');
@@ -117,7 +82,7 @@ addButton.addEventListener('click', () => {
 function handleFormSubmitPopupAdd (evt) {
   evt.preventDefault();
 
-  const newCard = {name: imageNameInput.value, link: imageLinkInput.value, alt: imageNameInput.value};
+  const newCard = {name: imageNameInput.value, link: imageLinkInput.value};
   cardsContainer.prepend(createCard(newCard));
 
   addPopup.closePopup();
