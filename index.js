@@ -3,6 +3,8 @@ import FormValidator from './moudls/FormValidator.js';
 import Section from './moudls/Section.js';
 import Popup from './moudls/Popup.js';
 import PopupWithImage from './moudls/PopupWithImage.js';
+import PopupWithForm from './moudls/PopupWithImage.js';
+import UserInfo from './moudls/UserInfo.js';
 
 import {
   initialCards,
@@ -22,29 +24,28 @@ import {
   cardsContainer,
   popupImage } from './utils/constants.js'
 
-const infoPopup = new Popup(popupInfo);
-const addPopup = new Popup(popupAdd);
+// const infoPopup = new Popup(popupInfo);
+// const addPopup = new Popup(popupAdd);
 const imagePopup = new PopupWithImage(popupImage);
+const userInfo = new UserInfo(profileName, profileDescription);
 
-// Открытие окна редактирования информации профиля
-editButton.addEventListener('click', function () {
-  infoPopup.openPopup();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileDescription.textContent;
-  profileInfoValidation.resetFormValidation();
+const infoPopupForm = new PopupWithForm(
+  popupInfo,
+  {handleFormSubmit: (name, job) => {
+    userInfo.setUserInfo(name, job);
+  }
 });
 
-// Отправка формы по нажатию кнопки Сохранить
-function handleFormSubmitPopupInfo (evt) {
-    evt.preventDefault();
+infoPopupForm.setEventListeners();
 
-    profileName.textContent = nameInput.value;
-    profileDescription.textContent = jobInput.value;
+// Открытие окна редактирования информации профиля
+editButton.addEventListener('click', () => {
+  infoPopupForm.openPopup();
+  nameInput.value = userInfo.getUserInfo().name;
+  jobInput.value = userInfo.getUserInfo().job;
+  profileInfoValidation.resetFormValidation();
 
-    infoPopup.closePopup();
-};
-
-formInfo.addEventListener('submit', handleFormSubmitPopupInfo);
+});
 
 // Отображение карточек
 const createCard = (item) => {
@@ -60,6 +61,8 @@ const createCard = (item) => {
   return cardElement;
 };
 
+imagePopup.setEventListeners();
+
 // Добавление 6 изначальных карточек
 const defaultCards = new Section({
   items: initialCards,
@@ -71,24 +74,22 @@ const defaultCards = new Section({
 
 defaultCards.renderCards(initialCards);
 
-// Открытие окна добавления карточки
-addButton.addEventListener('click', () => {
-  formAdd.reset();
-  addPopup.openPopup();
-  photoAddingValidation.resetFormValidation();
+// Добавление новой карточки с картинкой
+
+const addPopupForm = new PopupWithForm(
+  popupAdd,
+  {handleFormSubmit: (data) => {
+    createCard(data);
+  }
 });
 
-// Отправка формы по нажатию кнопки Создать (добавление карточки)
-function handleFormSubmitPopupAdd (evt) {
-  evt.preventDefault();
+addPopupForm.setEventListeners();
 
-  const newCard = {name: imageNameInput.value, link: imageLinkInput.value};
-  cardsContainer.prepend(createCard(newCard));
-
-  addPopup.closePopup();
-};
-
-formAdd.addEventListener('submit', handleFormSubmitPopupAdd);
+// Открытие окна добавления карточки
+addButton.addEventListener('click', () => {
+  addPopupForm.openPopup();
+  photoAddingValidation.resetFormValidation();
+});
 
 const profileInfoValidation = new FormValidator(formValidationConfig, popupInfo);
 profileInfoValidation.enableValidation();
