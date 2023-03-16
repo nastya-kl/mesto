@@ -1,9 +1,11 @@
-import Card from './moudls/Card.js';
-import FormValidator from './moudls/FormValidator.js';
-import Section from './moudls/Section.js';
-import PopupWithImage from './moudls/PopupWithImage.js';
-import PopupWithForm from './moudls/PopupWithForm.js';
-import UserInfo from './moudls/UserInfo.js';
+import './index.css';
+
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 import {
   initialCards,
@@ -17,7 +19,7 @@ import {
   popupAdd,
   addButton,
   cardsContainer,
-  popupImage } from './utils/constants.js'
+  popupImage } from '../utils/constants.js'
 
 const imagePopup = new PopupWithImage(popupImage);
 const userInfo = new UserInfo(profileName, profileDescription);

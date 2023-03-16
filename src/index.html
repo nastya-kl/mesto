@@ -5,19 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Места России">
+      <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип Места России">
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__avatar" src="./images/profile-photo.png" alt="Фото Жак-Ив-Кусто">
+          <img class="profile__avatar" src="<%=require('./images/profile-photo.png')%>" alt="Фото Жак-Ив-Кусто">
           <div class="profile__text">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля"></button>
@@ -132,7 +131,6 @@
     </li>
   </template>
 
-  <script defer type="module" src="./index.js"></script>
 </body>
 
 </html>
