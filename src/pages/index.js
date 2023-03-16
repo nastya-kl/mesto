@@ -37,8 +37,7 @@ infoPopupForm.setEventListeners();
 // Открытие окна редактирования профиля
 editButton.addEventListener('click', () => {
   infoPopupForm.openPopup();
-  nameInput.value = userInfo.getUserInfo().name;
-  jobInput.value = userInfo.getUserInfo().job;
+  infoPopupForm.setInputValues(userInfo.getUserInfo());
   profileInfoValidation.resetFormValidation();
 });
 
