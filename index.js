@@ -1,9 +1,8 @@
 import Card from './moudls/Card.js';
 import FormValidator from './moudls/FormValidator.js';
 import Section from './moudls/Section.js';
-import Popup from './moudls/Popup.js';
 import PopupWithImage from './moudls/PopupWithImage.js';
-import PopupWithForm from './moudls/PopupWithImage.js';
+import PopupWithForm from './moudls/PopupWithForm.js';
 import UserInfo from './moudls/UserInfo.js';
 
 import {
@@ -11,40 +10,34 @@ import {
   formValidationConfig,
   popupInfo,
   editButton,
-  formInfo,
   nameInput,
   jobInput,
   profileName,
   profileDescription,
   popupAdd,
   addButton,
-  formAdd,
-  imageNameInput,
-  imageLinkInput,
   cardsContainer,
   popupImage } from './utils/constants.js'
 
-// const infoPopup = new Popup(popupInfo);
-// const addPopup = new Popup(popupAdd);
 const imagePopup = new PopupWithImage(popupImage);
 const userInfo = new UserInfo(profileName, profileDescription);
 
+// Экземпляр класса PopupWithForm для окна редактирования профиля
 const infoPopupForm = new PopupWithForm(
   popupInfo,
-  {handleFormSubmit: (name, job) => {
-    userInfo.setUserInfo(name, job);
+  {handleFormSubmit: ({name, job}) => {
+    userInfo.setUserInfo({name, job});
   }
 });
 
 infoPopupForm.setEventListeners();
 
-// Открытие окна редактирования информации профиля
+// Открытие окна редактирования профиля
 editButton.addEventListener('click', () => {
   infoPopupForm.openPopup();
   nameInput.value = userInfo.getUserInfo().name;
   jobInput.value = userInfo.getUserInfo().job;
   profileInfoValidation.resetFormValidation();
-
 });
 
 // Отображение карточек
@@ -74,23 +67,23 @@ const defaultCards = new Section({
 
 defaultCards.renderCards(initialCards);
 
-// Добавление новой карточки с картинкой
-
+// Экземпляр класса PopupWithForm для окна добавления картинки
 const addPopupForm = new PopupWithForm(
   popupAdd,
   {handleFormSubmit: (data) => {
-    createCard(data);
+    defaultCards.addItem(createCard(data));
   }
 });
 
 addPopupForm.setEventListeners();
 
-// Открытие окна добавления карточки
+// Открытие окна добавления картинки
 addButton.addEventListener('click', () => {
   addPopupForm.openPopup();
   photoAddingValidation.resetFormValidation();
 });
 
+// Валидация форм
 const profileInfoValidation = new FormValidator(formValidationConfig, popupInfo);
 profileInfoValidation.enableValidation();
 

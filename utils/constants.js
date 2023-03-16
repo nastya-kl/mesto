@@ -37,7 +37,6 @@ const formValidationConfig = {
 // Добавление инф-ции профиля
 const popupInfo = document.querySelector('.popup_type_info');
 const editButton = document.querySelector('.profile__edit-button');
-const formInfo = popupInfo.querySelector('.popup__form');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
@@ -46,10 +45,6 @@ const profileDescription = document.querySelector('.profile__description');
 // Добавление карточек сфото
 const popupAdd = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button')
-const formAdd = popupAdd.querySelector('.popup__form');
-const imageNameInput = document.querySelector('.popup__input_type_image-name');
-const imageLinkInput = document.querySelector('.popup__input_type_image-link');
-// const allPopups = document.querySelectorAll('.popup');
 const cardsContainer = document.querySelector('.elements__container');
 const popupImage = document.querySelector('.popup_type_image')
 
@@ -58,16 +53,12 @@ export {
   formValidationConfig,
   popupInfo,
   editButton,
-  formInfo,
   nameInput,
   jobInput,
   profileName,
   profileDescription,
   popupAdd,
   addButton,
-  formAdd,
-  imageNameInput,
-  imageLinkInput,
   cardsContainer,
   popupImage
 };

@@ -27,9 +27,7 @@ export default class Popup {
         this.closePopup();
       });
 
-
-
-    this._popup.addEventListener('moussedown', (evt) => {
+    this._popup.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains('popup_opened')) {
         this.closePopup();
       }
