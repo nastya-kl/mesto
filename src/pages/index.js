@@ -6,47 +6,111 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import PopupConfirmDelete from '../components/PopupConfirmDelete.js';
+import Api from '../components/Api';
 
 import {
-  initialCards,
   formValidationConfig,
   popupInfo,
   editButton,
-  nameInput,
-  jobInput,
   profileName,
   profileDescription,
   popupAdd,
   addButton,
   cardsContainer,
-  popupImage } from '../utils/constants.js'
+  popupImage,
+  popupAvatar,
+  profileAvatar,
+  profileAvatarContainer,
+  popupDeleteCard } from '../utils/constants.js'
 
 const imagePopup = new PopupWithImage(popupImage);
-const userInfo = new UserInfo(profileName, profileDescription);
+const userInfo = new UserInfo(profileName, profileDescription, profileAvatar);
 
-// Экземпляр класса PopupWithForm для окна редактирования профиля
-const infoPopupForm = new PopupWithForm(
-  popupInfo,
-  {handleFormSubmit: ({name, job}) => {
-    userInfo.setUserInfo({name, job});
-  }
+let userId;
+
+// Валидация форм
+const profileInfoValidation = new FormValidator(formValidationConfig, popupInfo);
+profileInfoValidation.enableValidation();
+
+const photoAddingValidation = new FormValidator(formValidationConfig, popupAdd);
+photoAddingValidation.enableValidation();
+
+const avatarChangeValidation = new FormValidator(formValidationConfig, popupAvatar);
+avatarChangeValidation.enableValidation();
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-62',
+  headers: {
+    authorization: 'c459a7d9-2d92-4209-961a-1eacde45ecb4',
+    'Content-Type': 'application/json'
+  },
 });
 
-infoPopupForm.setEventListeners();
+Promise.all([
+  api.getUserInfo()
+    .then((data) => {
+      userId = data._id;
+      userInfo.setProfileInfo(data);
+      profileAvatar.src = data.avatar;
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    }),
+  api.getInitialCards()
+    .then((data) => {
+      defaultCards.renderCards(data);
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
+])
 
-// Открытие окна редактирования профиля
-editButton.addEventListener('click', () => {
-  infoPopupForm.openPopup();
-  infoPopupForm.setInputValues(userInfo.getUserInfo());
-  profileInfoValidation.resetFormValidation();
-});
+// Попап подтерждения удаления карточки
+const popupConfirmDelete = new PopupConfirmDelete(popupDeleteCard);
+
+popupConfirmDelete.setEventListeners();
 
 // Отображение карточек
 const createCard = (item) => {
   const card = new Card({
     data: item,
+    ownerId: item.owner._id,
+    userId: userId,
     handleCardClick: (link, name) => {
       imagePopup.openPopup(link, name);
+    },
+    handleDeleteIconClick: () => {
+      popupConfirmDelete.openPopup();
+      popupConfirmDelete.setSubmitAction(() => {
+        api.deleteCard(card.getCardId())
+          .then(() => {
+            card.deleteCard();
+            popupConfirmDelete.closePopup();
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          })
+      })
+    },
+    handleLikeIconClick: () => {
+      if(card.cardIsLiked()) {
+        api.removeLike(card.getCardId())
+          .then((data) => {
+            card.updateLikeNumbers(data.likes);
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          })
+      } else {
+        api.putLike(card.getCardId())
+          .then((data) => {
+            card.updateLikeNumbers(data.likes);
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          })
+      }
     }
   },
   '#elements-template');
@@ -57,24 +121,60 @@ const createCard = (item) => {
 
 imagePopup.setEventListeners();
 
-// Добавление 6 изначальных карточек
+// Экземпляр класса Section
 const defaultCards = new Section({
-  items: initialCards,
   renderer: (item) => {
-    defaultCards.addItem(createCard(item))
+    defaultCards.addItem(createCard(item));
   }
 }, cardsContainer
 )
 
-defaultCards.renderCards(initialCards);
+// Экземпляр класса PopupWithForm для окна изменения аватара
+const avatarChangeForm = new PopupWithForm(
+  popupAvatar,
+  {handleFormSubmit: (data) => {
+    avatarChangeForm.buttonIsLoading(true);
+    api.changeUserAvatar(data)
+      .then((data) => {
+        userInfo.changeProfileAvatar(data);
+        avatarChangeForm.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        avatarChangeForm.buttonIsLoading(false);
+      })
+  }}
+);
+
+avatarChangeForm.setEventListeners();
+
+// Открытие окна изменения аватара
+profileAvatarContainer.addEventListener('click', () => {
+  avatarChangeForm.openPopup();
+  photoAddingValidation.resetFormValidation();
+});
+
 
 // Экземпляр класса PopupWithForm для окна добавления картинки
 const addPopupForm = new PopupWithForm(
   popupAdd,
   {handleFormSubmit: (data) => {
-    defaultCards.addItem(createCard(data));
-  }
-});
+    addPopupForm.buttonIsLoading(true);
+    api.addNewCard(data)
+      .then((res) => {
+        defaultCards.addNewItem(createCard(res));
+        addPopupForm.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        addPopupForm.buttonIsLoading(false);
+      })
+  }}
+);
 
 addPopupForm.setEventListeners();
 
@@ -84,9 +184,30 @@ addButton.addEventListener('click', () => {
   photoAddingValidation.resetFormValidation();
 });
 
-// Валидация форм
-const profileInfoValidation = new FormValidator(formValidationConfig, popupInfo);
-profileInfoValidation.enableValidation();
+// Экземпляр класса PopupWithForm для окна редактирования профиля
+const infoPopupForm = new PopupWithForm(
+  popupInfo,
+  {handleFormSubmit: (data) => {
+    infoPopupForm.buttonIsLoading(true);
+    api.changeUserInfo(data)
+      .then((data) => {
+        userInfo.setProfileInfo(data);
+        infoPopupForm.closePopup();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        infoPopupForm.buttonIsLoading(false);
+      })
+  }
+});
 
-const photoAddingValidation = new FormValidator(formValidationConfig, popupAdd);
-photoAddingValidation.enableValidation();
+infoPopupForm.setEventListeners();
+
+// Открытие окна редактирования профиля
+editButton.addEventListener('click', () => {
+  infoPopupForm.openPopup();
+  infoPopupForm.setInputValues(userInfo.getProfileInfo());
+  profileInfoValidation.resetFormValidation();
+});

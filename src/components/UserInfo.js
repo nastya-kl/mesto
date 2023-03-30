@@ -1,10 +1,11 @@
 export default class UserInfo {
-  constructor(userName, userJob) {
+  constructor(userName, userJob, userAvatar) {
     this._userName = userName;
     this._userJob = userJob;
+    this._avatar = userAvatar;
   }
 
-  getUserInfo() {
+  getProfileInfo() {
     this._userInfoValues = {};
     this._userInfoValues['name'] = this._userName.textContent;
     this._userInfoValues['job'] = this._userJob.textContent;
@@ -12,8 +13,13 @@ export default class UserInfo {
     return this._userInfoValues;
   }
 
-  setUserInfo({name, job}) {
-    this._userName.textContent = name;
-    this._userJob.textContent = job;
+  setProfileInfo(data) {
+    this._userName.textContent = data.name;
+    this._userJob.textContent = data.about;
+  }
+
+  changeProfileAvatar(data) {
+    this._avatar.src = data.avatar;
+    console.log(data);
   }
 }
