@@ -23,7 +23,7 @@ const popupImage = document.querySelector('.popup_type_image')
 const profileAvatar = document.querySelector('.profile__avatar');
 const profileAvatarContainer = document.querySelector('.profile__avatar-container');
 const popupAvatar = document.querySelector('.popup_type_avatar');
-const popupDeleteCard = document.querySelector('.popyp_type_delete')
+const popupDeleteCard = document.querySelector('.popup_type_delete')
 
 export {
   formValidationConfig,
