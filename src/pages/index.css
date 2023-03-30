@@ -61,5 +61,5 @@
 @import url(../blocks/popup/__image-caption/popup__image-caption.css);
 @import url(../blocks/popup/_background/popup_background_dark.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
-@import url(../blocks/popup/__confirm-heading/popup__confirm-heading.css);
-@import url(../blocks/popup/__confirm-container/popup__confirm-container.css);
+@import url(../blocks/popup/__delete-heading/popup__delete-heading.css);
+@import url(../blocks/popup/__delete-container/popup__delete-container.css);

@@ -1,4 +1,4 @@
-.popup__confirm-heading {
+.popup__delete-heading {
   margin: 0 51px 38px 0;
   color: black;
   font-weight: 900;
@@ -7,14 +7,14 @@
 }
 
 @media screen and (max-width: 700px) {
-  .popup__confirm-heading {
+  .popup__delete-heading {
     font-size: 18px;
     line-height: 22px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .popup__confirm-heading {
+  .popup__delete-heading {
     margin: 0 7px 38px 0;
   }
 }

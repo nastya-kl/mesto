@@ -1,4 +1,4 @@
-.popup__confirm-container {
+.popup__delete-container {
   max-width: 358px;
   margin: 0;
   display: flex;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .popup__confirm-container {
+  .popup__delete-container {
     max-width: 238px;
   }
 }
