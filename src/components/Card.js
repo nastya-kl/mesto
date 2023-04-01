@@ -52,7 +52,7 @@ export default class Card {
     this._likeButton.classList.remove('element__like-button_active');
   }
 
-  _likeButtonStatus() {
+  _changeLikeButtonStatus() {
     if(this.cardIsLiked()) {
       this.putLike();
     } else {
@@ -63,7 +63,7 @@ export default class Card {
   updateLikeNumbers(data) {
     this.likesArray = data;
     this._likesNumber.textContent = data.length;
-    this._likeButtonStatus();
+    this._changeLikeButtonStatus();
   }
 
   deleteCard() {

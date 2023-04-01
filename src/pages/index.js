@@ -47,24 +47,20 @@ const api = new Api({
   },
 });
 
-Promise.all([
-  api.getUserInfo()
-    .then((data) => {
-      userId = data._id;
-      userInfo.setProfileInfo(data);
-      profileAvatar.src = data.avatar;
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    }),
-  api.getInitialCards()
-    .then((data) => {
-      defaultCards.renderCards(data);
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    })
-])
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setProfileInfo(
+      userData.name,
+      userData.about,
+      userData.avatar,
+      userId = userData._id
+      );
+    defaultCards.renderCards(cards);
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  })
+
 
 // Попап подтерждения удаления карточки
 const popupConfirmDelete = new PopupConfirmDelete(popupDeleteCard);
@@ -133,7 +129,7 @@ const defaultCards = new Section({
 const avatarChangeForm = new PopupWithForm(
   popupAvatar,
   {handleFormSubmit: (data) => {
-    avatarChangeForm.buttonIsLoading(true);
+    avatarChangeForm.renderLoading(true);
     api.changeUserAvatar(data)
       .then((data) => {
         userInfo.changeProfileAvatar(data);
@@ -143,7 +139,7 @@ const avatarChangeForm = new PopupWithForm(
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        avatarChangeForm.buttonIsLoading(false);
+        avatarChangeForm.renderLoading(false);
       })
   }}
 );
@@ -161,7 +157,7 @@ profileAvatarContainer.addEventListener('click', () => {
 const addPopupForm = new PopupWithForm(
   popupAdd,
   {handleFormSubmit: (data) => {
-    addPopupForm.buttonIsLoading(true);
+    addPopupForm.renderLoading(true);
     api.addNewCard(data)
       .then((res) => {
         defaultCards.addNewItem(createCard(res));
@@ -171,7 +167,7 @@ const addPopupForm = new PopupWithForm(
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        addPopupForm.buttonIsLoading(false);
+        addPopupForm.renderLoading(false);
       })
   }}
 );
@@ -188,17 +184,17 @@ addButton.addEventListener('click', () => {
 const infoPopupForm = new PopupWithForm(
   popupInfo,
   {handleFormSubmit: (data) => {
-    infoPopupForm.buttonIsLoading(true);
+    infoPopupForm.renderLoading(true);
     api.changeUserInfo(data)
       .then((data) => {
-        userInfo.setProfileInfo(data);
+        userInfo.setProfileInfo(data.name, data.about, data.avatar, data._id);
         infoPopupForm.closePopup();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        infoPopupForm.buttonIsLoading(false);
+        infoPopupForm.renderLoading(false);
       })
   }
 });
