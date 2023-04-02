@@ -49,12 +49,8 @@ const api = new Api({
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
-    userInfo.setProfileInfo(
-      userData.name,
-      userData.about,
-      userData.avatar,
-      userId = userData._id
-      );
+    userInfo.setProfileInfo(userData);
+    userId = userData._id;
     defaultCards.renderCards(cards);
   })
   .catch((err) => {
@@ -132,7 +128,7 @@ const avatarChangeForm = new PopupWithForm(
     avatarChangeForm.renderLoading(true);
     api.changeUserAvatar(data)
       .then((data) => {
-        userInfo.changeProfileAvatar(data);
+        userInfo.changeProfileAvatar(data.avatar);
         avatarChangeForm.closePopup();
       })
       .catch((err) => {
@@ -149,7 +145,7 @@ avatarChangeForm.setEventListeners();
 // Открытие окна изменения аватара
 profileAvatarContainer.addEventListener('click', () => {
   avatarChangeForm.openPopup();
-  photoAddingValidation.resetFormValidation();
+  avatarChangeValidation.resetFormValidation();
 });
 
 
@@ -187,7 +183,7 @@ const infoPopupForm = new PopupWithForm(
     infoPopupForm.renderLoading(true);
     api.changeUserInfo(data)
       .then((data) => {
-        userInfo.setProfileInfo(data.name, data.about, data.avatar, data._id);
+        userInfo.setProfileInfo(data);
         infoPopupForm.closePopup();
       })
       .catch((err) => {
